@@ -582,6 +582,27 @@ h2:not(.section-head){margin:3rem 0 .75rem}
 @media (prefers-reduced-motion:reduce){.prog-steps span.late{animation:none}}
 </style>
 
+<style>
+/* To-do highlights: anything to complete or write in the notebook */
+:root{--todo:#ffe3e0;--todo-line:#e5484d}
+:root[data-theme="dark"]{--todo:#4a1f1f;--todo-line:#ff7b7b}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--todo:#4a1f1f;--todo-line:#ff7b7b}}
+.todo,.bell-dir,.item-ext,.hook-note,#trickNote,.notebook .item-q,.exit .item-dir,.jot:not(.ok),.oreac-row:not(.filled),.gm-row:not(:has(.picked)),.video .bell-dir,.vid-qs li{background:var(--todo)!important;border-left:5px solid var(--todo-line)!important;border-radius:8px;padding:.6rem .8rem!important}
+.bell-dir,.item-ext,.hook-note,#trickNote,.notebook .item-q,.exit .item-dir{margin:.2rem 0!important}
+.jot:not(.ok){border-color:var(--todo-line)!important;border-style:dashed!important}
+.oreac-row:not(.filled){border-color:var(--todo-line)!important}
+.gm-row:not(:has(.picked)){border-color:var(--todo-line)!important}
+.todo-tag{display:inline-block;font-family:var(--font-mono);font-size:.68rem;font-weight:700;letter-spacing:.06em;background:var(--todo-line);color:#fff;border-radius:4px;padding:.05rem .4rem;margin-right:.4rem;vertical-align:middle}
+input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholder-shown,.jot-text:placeholder-shown{background:var(--todo)!important;border-color:var(--todo-line)!important}
+.ad-form .ad-l:has(input:placeholder-shown){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.4rem .6rem}
+#adIcons:not(:has(.picked)){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.4rem .6rem}
+.choices:not(:has(.correct,.wrong,.picked)){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.5rem .6rem}
+.bell-list li:not(:has(.on)){background:var(--todo);border-left:5px solid var(--todo-line);border-radius:8px;padding:.4rem .6rem}
+.todo-key{display:flex;align-items:center;gap:.6rem;font-size:.85rem;margin:0 0 2rem;font-family:var(--font-ui)}
+.todo-key span.sw2{display:inline-block;width:2.2rem;height:1.1rem;background:var(--todo);border-left:5px solid var(--todo-line);border-radius:4px}
+:root[data-theme="dark"] .todo-tag{color:#111}
+</style>
+
 <div class="wrap">
   <nav class="rail" id="rail" aria-label="Lesson sections">
     <div class="rail-top">
@@ -632,6 +653,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
   <p class="howto">Press <strong>Listen to all</strong> to hear the whole passage, or the round button beside a paragraph to hear only that part. Tap any <span class="v" style="cursor:default">blue word</span> to see what it means.</p>
 
   <p class="legend"><span style="--sec:#1e5a8a">Today's goals</span><span style="--sec:#c9a227">Bell ringer</span><span style="--sec:#b8441f">Hook &amp; lab</span><span style="--sec:#2e7d4f">Read &amp; listen</span><span style="--sec:#6a3d9a">Rebuild a habit</span><span style="--sec:#1b7f8a">Vocabulary</span><span style="--sec:#c2185b">Grammar</span><span style="--sec:#b8441f">Test prep</span><span style="--sec:#6a3d9a">Exit ticket</span></p>
+  <p class="todo-key"><span class="sw2"></span><span><b>Light red = something to do:</b> tap, write on this page, or write in your notebook. It turns normal when it is done. <span class="es">Rojo claro = algo por hacer: toca, escribe en esta página o en tu cuaderno. Vuelve a lo normal cuando está hecho.</span></span></p>
   <div class="plan90"><span class="eyebrow">90-minute plan <span class="es">Plan de 90 minutos</span></span>
     <ol><li><b>5</b> Bell ringer</li><li><b>5</b> Draw it</li><li><b>5</b> Hook + lab</li><li><b>10</b> Video</li><li><b>15</b> Read &amp; listen</li><li><b>8</b> Vocabulary</li><li><b>7</b> Grammar</li><li><b>10</b> Rebuild a habit</li><li><b>15</b> Test prep</li><li><b>10</b> Exit ticket</li></ol></div>
   <section class="today" id="s-today" aria-label="Today's lesson">
@@ -654,7 +676,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
       <div><div class="eyebrow">Bell ringer · 10 minutes · Part 1 · 5 minutes</div><p class="bell-title">Agree or disagree?</p></div>
       <div class="timer"><span id="timerText">5:00</span><button id="timerBtn">Start</button></div>
     </div>
-    <p class="bell-dir"><b>Step 1:</b> Read each statement and tap <b>Agree</b> or <b>Disagree</b>.<br><b>Step 2:</b> In your notebook, write one sentence for <u>each</u> of your four choices using the frame: <i>“I agree/disagree that ___ because ___.”</i><br><b>Step 3:</b> Be ready to read one of your sentences to the class.</p>
+    <p class="bell-dir"><span class="todo-tag">NOTEBOOK</span><b>Step 1:</b> Read each statement and tap <b>Agree</b> or <b>Disagree</b>.<br><b>Step 2:</b> In your notebook, write one sentence for <u>each</u> of your four choices using the frame: <i>“I agree/disagree that ___ because ___.”</i><br><b>Step 3:</b> Be ready to read one of your sentences to the class.</p>
     <ol class="bell-list" id="bell">
       <li><span>Most of what I do every day is a decision I make on purpose.</span><div class="ad"><button data-v="agree">Agree</button><button data-v="disagree">Disagree</button></div></li>
       <li><span>A bad habit means a person is lazy.</span><div class="ad"><button data-v="agree">Agree</button><button data-v="disagree">Disagree</button></div></li>
@@ -668,7 +690,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
         <div><div class="eyebrow">Part 2 · Draw it · 5 minutes</div><p class="bell-title">Draw one of your habits as a loop</p></div>
         <div class="timer"><span id="timer2Text">5:00</span><button id="timer2Btn">Start</button></div>
       </div>
-      <p class="bell-dir"><b>Step 1:</b> Think of one thing you do every day without thinking (checking your phone, taking the same seat, buying the same snack). Draw it in <u>three boxes with arrows</u>: what starts it → what you do → what you get. Use the sketchpad below or your notebook.<br><b>Step 2:</b> Label each box with a word from the box: <i>cue, signal, routine, behavior, reward, repeat</i>.<br><b>Step 3:</b> Under the drawing, write one sentence: <i>“When ___, I ___, and I get ___.”</i></p>
+      <p class="bell-dir"><span class="todo-tag">DRAW</span><b>Step 1:</b> Think of one thing you do every day without thinking (checking your phone, taking the same seat, buying the same snack). Draw it in <u>three boxes with arrows</u>: what starts it → what you do → what you get. Use the sketchpad below or your notebook.<br><b>Step 2:</b> Label each box with a word from the box: <i>cue, signal, routine, behavior, reward, repeat</i>.<br><b>Step 3:</b> Under the drawing, write one sentence: <i>“When ___, I ___, and I get ___.”</i></p>
       <div class="pad-tools">
         <span class="ctrl">Color</span>
         <button class="sw on" data-c="#1f1b16" style="background:#1f1b16" aria-label="Black"></button>
@@ -726,7 +748,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
         <button data-v="routine">Routine · tapping got faster and easier</button>
         <button data-v="reward">Reward · I kept tapping to get the good message</button>
       </div>
-      <p class="item-ext" id="trickNote">In your notebook: <i>“The strongest part of my loop was the ___ because ___.”</i> You will read about all three parts in paragraphs 2–4.</p>
+      <p class="item-ext" id="trickNote"><span class="todo-tag">NOTEBOOK</span>In your notebook: <i>“The strongest part of my loop was the ___ because ___.”</i> You will read about all three parts in paragraphs 2–4.</p>
     </div>
   </section>
     <div class="frame-grid">
@@ -773,7 +795,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
       <div><div class="eyebrow">Watch · 10 minutes</div><p class="bell-title" style="margin:0">The Power of Habit, animated</p></div>
       <div class="timer"><span id="timer7Text">10:00</span><button id="timer7Btn">Start</button></div>
     </div>
-    <p class="bell-dir"><b>Step 1:</b> Watch once with captions on (tap <b>CC</b>). Turn on English captions, or Spanish if you need them.<br><b>Step 2:</b> As you watch, listen for the <u>three parts</u> of the habit loop and write them in your notebook.<br><b>Step 3:</b> Answer the three video checks below. They grade themselves; you get one try each.</p>
+    <p class="bell-dir"><span class="todo-tag">WATCH + NOTEBOOK</span><b>Step 1:</b> Watch once with captions on (tap <b>CC</b>). Turn on English captions, or Spanish if you need them.<br><b>Step 2:</b> As you watch, listen for the <u>three parts</u> of the habit loop and write them in your notebook.<br><b>Step 3:</b> Answer the three video checks below. They grade themselves; you get one try each.</p>
     <div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/UMOZZ5uZgxA?rel=0&cc_load_policy=1" title="The Power of Habit Animated Summary" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <p class="chart-note" style="text-align:left"><a class="vid-alt" href="https://www.youtube.com/watch?v=UMOZZ5uZgxA" target="_blank" rel="noopener">▶ Open the video on YouTube instead</a> · <span class="es">Abrir el video en YouTube</span></p>
     <p class="chart-note" style="text-align:left">Video: “The Power of Habit Animated Summary” on YouTube, based on the book by Charles Duhigg. Watch it right here. If you open it on YouTube instead, the attention lock stays off for 12 minutes.</p>
@@ -808,7 +830,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
       <p class="feedback" data-vfb="3" aria-live="polite"></p>
     </div>
     <p class="feedback" id="vidScore"><b>Video score: 0 / 3</b><span class="es">Puntuación del video: 0 / 3</span></p>
-    <p class="item-ext"><b>Turn and talk:</b> Tell a partner one habit of your own that works the same way: <i>“When ___, I ___. The reward is ___.”</i> Then read the passage below.</p>
+    <p class="item-ext"><span class="todo-tag">SPEAK</span><b>Turn and talk:</b> Tell a partner one habit of your own that works the same way: <i>“When ___, I ___. The reward is ___.”</i> Then read the passage below.</p>
   </section>
 
 
@@ -835,7 +857,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
     <div class="para" data-i="1"><div class="pnum"><span>2</span><button class="pplay" aria-label="Play paragraph 2">▶</button></div>
       <p>The first part is the <button class="v" data-w="cue">cue</button>. A cue is a <button class="v" data-w="signal">signal</button> that tells the brain to start a routine. It can be a time of day, a place, a feeling, or another person. For example, when the bell rings at the end of fourth period, many students reach for their phones. The bell is the cue. The brain hears it and gets ready for what usually comes next.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">La primera parte es la señal de inicio (cue). Una señal es un aviso que le dice al cerebro que empiece una rutina. Puede ser una hora del día, un lugar, un sentimiento u otra persona. Por ejemplo, cuando suena el timbre al final del cuarto periodo, muchos estudiantes buscan sus teléfonos. El timbre es la señal. El cerebro lo oye y se prepara para lo que normalmente viene después.</div></div>
 
-    <div class="jot" data-after="1" data-keys="cue,signal,start,bell,time,place,feeling,person,phone"><div class="jot-head"><span class="eyebrow">Stop and jot · after paragraphs 1–2</span><button class="jot-go" hidden>Continue reading ▶</button></div>
+    <div class="jot" data-after="1" data-keys="cue,signal,start,bell,time,place,feeling,person,phone"><div class="jot-head"><span class="eyebrow"><span class="todo-tag">WRITE HERE</span>Stop and jot · after paragraphs 1–2</span><button class="jot-go" hidden>Continue reading ▶</button></div>
       <p>In one sentence: <b>What is a cue, and what is one cue in your own day?</b></p>
       <textarea class="jot-text" rows="2" placeholder="A cue is… One cue in my day is…"></textarea><p class="jot-fb">Write at least 6 words using a word from the paragraphs. <span class="es">Escribe al menos 6 palabras usando una palabra de los párrafos.</span></p></div>
 
@@ -845,7 +867,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
     <div class="para" data-i="3"><div class="pnum"><span>4</span><button class="pplay" aria-label="Play paragraph 4">▶</button></div>
       <p>The third part is the <button class="v" data-w="reward">reward</button>. The reward is what the brain gets at the end of the routine. It might be a message from a friend, a laugh, or just a break from thinking. The reward is the reason the loop repeats. When the brain receives a reward, it releases <button class="v" data-w="dopamine">dopamine</button>, a chemical that creates a feeling of <button class="v" data-w="pleasure">pleasure</button>. The brain remembers that feeling and wants it again. Until the reward stops, the habit stays strong.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">La tercera parte es la recompensa. La recompensa es lo que el cerebro recibe al final de la rutina. Puede ser un mensaje de un amigo, una risa o simplemente un descanso de pensar. La recompensa es la razón por la que el ciclo se repite. Cuando el cerebro recibe una recompensa, libera dopamina, una sustancia química que crea una sensación de placer. El cerebro recuerda esa sensación y la quiere otra vez. Hasta que la recompensa se detiene, el hábito sigue fuerte.</div></div>
 
-    <div class="jot" data-after="3" data-keys="reward,dopamine,pleasure,feeling,wants,again,chemical,good"><div class="jot-head"><span class="eyebrow">Stop and jot · after paragraphs 3–4</span><button class="jot-go" hidden>Continue reading ▶</button></div>
+    <div class="jot" data-after="3" data-keys="reward,dopamine,pleasure,feeling,wants,again,chemical,good"><div class="jot-head"><span class="eyebrow"><span class="todo-tag">WRITE HERE</span>Stop and jot · after paragraphs 3–4</span><button class="jot-go" hidden>Continue reading ▶</button></div>
       <p>In one sentence: <b>Why does the loop repeat, according to paragraph 4?</b></p>
       <textarea class="jot-text" rows="2" placeholder="The loop repeats because…"></textarea><p class="jot-fb">Write at least 6 words using a word from the paragraphs. <span class="es">Escribe al menos 6 palabras usando una palabra de los párrafos.</span></p></div>
 
@@ -855,7 +877,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
     <div class="para" data-i="5"><div class="pnum"><span>6</span><button class="pplay" aria-label="Play paragraph 6">▶</button></div>
       <p>Building a new habit takes time. One study found that a new routine takes about 66 days, on <button class="v" data-w="average">average</button>, to become <button class="v" data-w="automatic">automatic</button>. Some habits take less time, and some take much more. The key is <button class="v" data-w="repetition">repetition</button> in the same situation. <button class="v" data-w="experts">Experts</button> suggest <button class="v" data-w="attaching">attaching</button> the new routine to a cue that already <button class="v" data-w="exists">exists</button>. For instance, after you sit down at your desk, open your notebook. After a few weeks, the desk becomes the cue, and studying becomes the routine. The loop works for you instead of against you.</p><button class="es-toggle" type="button" aria-expanded="false">Ver en español ▾</button><div class="para-es" lang="es">Construir un hábito nuevo toma tiempo. Un estudio encontró que una rutina nueva tarda unos 66 días, en promedio, en volverse automática. Algunos hábitos toman menos tiempo y otros mucho más. La clave es la repetición en la misma situación. Los expertos sugieren unir la rutina nueva a una señal que ya existe. Por ejemplo, después de sentarte en tu escritorio, abre tu cuaderno. Después de unas semanas, el escritorio se convierte en la señal y estudiar se convierte en la rutina. El ciclo trabaja a tu favor y no en tu contra.</div></div>
 
-    <div class="jot" data-after="5" data-keys="routine,cue,reward,change,replace,keep,walk,phone"><div class="jot-head"><span class="eyebrow">Stop and jot · after paragraphs 5–6</span><button class="jot-go" hidden>Done ✓</button></div>
+    <div class="jot" data-after="5" data-keys="routine,cue,reward,change,replace,keep,walk,phone"><div class="jot-head"><span class="eyebrow"><span class="todo-tag">WRITE HERE</span>Stop and jot · after paragraphs 5–6</span><button class="jot-go" hidden>Done ✓</button></div>
       <p>In one sentence: <b>Which part of the loop would you change to fix a habit, and why?</b></p>
       <textarea class="jot-text" rows="2" placeholder="I would change the… because the text says…"></textarea><p class="jot-fb">Write at least 6 words using a word from the paragraphs. <span class="es">Escribe al menos 6 palabras usando una palabra de los párrafos.</span></p></div>
   </div>
@@ -893,12 +915,12 @@ h2:not(.section-head){margin:3rem 0 .75rem}
       </div>
     </div>
     <p class="feedback" id="adStatus">0 of 6 parts done.</p>
-    <p class="item-ext"><b>Explain it (30 seconds):</b> <i>“My habit is ___. When ___, I ___. The reward is ___. I will replace ___ with ___ because the brain still gets its cue and its reward.”</i></p>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK + SPEAK</span><b>Explain it (30 seconds):</b> <i>“My habit is ___. When ___, I ___. The reward is ___. I will replace ___ with ___ because the brain still gets its cue and its reward.”</i></p>
   </section>
 
   <section class="item notebook" id="s-vocab" aria-label="Vocabulary notebook">
     <div class="eyebrow">Vocabulary notebook</div>
-    <p class="item-q">As you read, tap each <span class="v" style="cursor:default">blue word</span> and copy it into your notebook with its meaning <b>in your own words</b>. Set up your page like this:</p>
+    <p class="item-q"><span class="todo-tag">NOTEBOOK</span>As you read, tap each <span class="v" style="cursor:default">blue word</span> and copy it into your notebook with its meaning <b>in your own words</b>. Set up your page like this:</p>
     <div class="nb-ex"><span>Word</span><span>My definition</span></div>
     <div class="nb-ex nb-row"><span>cue</span><span>a signal that tells my brain to start a routine</span></div>
     <p class="item-ext">Goal: at least <b>10 words</b> before you start the questions below. You may write the Spanish word next to the English word if it helps you remember.</p>
@@ -919,7 +941,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
     </div>
     <p class="feedback" id="vmStatus">0 of 8 matched.</p>
     <div class="acts"><button id="vmShuffle">New set of words</button><button id="vmSpeed" class="btn-primary">⚡ 60-second speed round</button></div>
-    <p class="item-ext"><b>Use it:</b> In your notebook, write three sentences about your own habits. Use one vocabulary word in each sentence and underline it. Example: <i>“When the bell rings, the <u>cue</u> tells my brain to grab my phone.”</i></p>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK</span><b>Use it:</b> In your notebook, write three sentences about your own habits. Use one vocabulary word in each sentence and underline it. Example: <i>“When the bell rings, the <u>cue</u> tells my brain to grab my phone.”</i></p>
   </section>
 
   <h2 class="c-pink">Grammar move · Join two steps into one sentence <span class="es">Movida de gramática · Une dos pasos en una oración</span></h2>
@@ -941,7 +963,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
       <div class="poll gm-pick"><button data-v="When">When</button><button data-v="After">After</button><button data-v="Once">Once</button><button data-v="Until">Until</button></div>
       <p class="gm-out"></p>
     </div>
-    <p class="item-ext"><b>Your turn:</b> In your notebook, rewrite one of the three sentences with the joining word in the <u>middle</u> (<i>Students reach for their phones when the bell rings.</i>) and explain what happened to the comma.</p>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK</span><b>Your turn:</b> In your notebook, rewrite one of the three sentences with the joining word in the <u>middle</u> (<i>Students reach for their phones when the bell rings.</i>) and explain what happened to the comma.</p>
   </section>
 
   <h2 class="section-head c-orange" id="s-test"><span class="h-ic">📝</span>Test prep <span class="es">Preparación para el examen</span></h2>
@@ -988,7 +1010,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
       <button data-k="D"><span class="letter">D</span> A routine that takes more effort becomes automatic faster.</button>
     </div>
     <p class="feedback" id="feedback" aria-live="polite"></p>
-    <p class="item-ext"><b>Part B (explain):</b> Write one sentence using the frame: <i>“The graph shows that ___, and paragraph 6 says ___.”</i><span class="es"><b>Parte B (explica):</b> Escribe una oración con el marco: «The graph shows that ___, and paragraph 6 says ___».</span></p>
+    <p class="item-ext"><span class="todo-tag">NOTEBOOK</span><b>Part B (explain):</b> Write one sentence using the frame: <i>“The graph shows that ___, and paragraph 6 says ___.”</i><span class="es"><b>Parte B (explica):</b> Escribe una oración con el marco: «The graph shows that ___, and paragraph 6 says ___».</span></p>
   </section>
 
   <h2 class="c-orange">Test prep 2 · Word meaning <span class="es">Preparación 2 · Significado de una palabra</span></h2>
@@ -1082,7 +1104,7 @@ h2:not(.section-head){margin:3rem 0 .75rem}
   <section class="item exit" id="s-exit" aria-label="Exit ticket">
     <div class="eyebrow">Essential question</div>
     <p class="eq-q">Who runs your habits: you, or the loop?</p>
-    <p class="item-dir">Write <b>one sentence for each letter</b> of <b>O·R·E·A·C</b>. Use at least <b>three vocabulary words</b> from the passage, and make at least one sentence a complex sentence with <i>when, after, once,</i> or <i>until</i>. Your five sentences become one paragraph at the bottom.</p>
+    <p class="item-dir"><span class="todo-tag">WRITE HERE</span>Write <b>one sentence for each letter</b> of <b>O·R·E·A·C</b>. Use at least <b>three vocabulary words</b> from the passage, and make at least one sentence a complex sentence with <i>when, after, once,</i> or <i>until</i>. Your five sentences become one paragraph at the bottom.</p>
     <div class="oreac">
       <label class="oreac-row"><span class="oreac-letter">O</span><span class="oreac-body"><b>Opinion</b> · Who runs your habits? <span class="es">¿Quién maneja tus hábitos?</span> <input class="oreac-in" data-k="O" type="text" placeholder="I think ___ runs my habits because…"></span></label>
       <label class="oreac-row"><span class="oreac-letter">R</span><span class="oreac-body"><b>Reason</b> · Why do you think so? <span class="es">¿Por qué piensas eso?</span> <input class="oreac-in" data-k="R" type="text" placeholder="One reason is that when ___, I ___ without thinking."></span></label>
