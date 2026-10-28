@@ -452,6 +452,7 @@ body{background:var(--bg);background-image:linear-gradient(color-mix(in srgb,var
 .rail-ctl{display:flex;gap:.35rem}
 .rail-ctl button{font-family:var(--font-mono);font-weight:700;padding:.3rem .55rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);color:var(--fg);box-shadow:3px 3px 0 var(--fg)}
 .rail-ctl #langBtn{background:var(--vocab);color:#fff}
+.hero-links{margin:.8rem 0 0}.hero-links .btn-link{background:var(--fg);color:#fff;border:2px solid var(--fg);box-shadow:3px 3px 0 var(--accent);border-radius:8px;text-decoration:none;font-family:var(--font-mono);font-size:.85rem}.hero-links .es{display:inline;color:#fff;opacity:.8;font-style:normal}
 .rail-agenda{display:inline-grid;place-items:center;text-decoration:none;font-size:1rem;padding:.3rem .5rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);box-shadow:3px 3px 0 var(--fg);color:var(--fg)}
 .rail-links{list-style:none;margin:0;padding:0;display:grid;gap:.3rem;counter-reset:s}
 .rail-links a{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--fg);font-family:var(--font-ui);font-weight:600;font-size:.9rem;padding:.4rem .5rem;border:2px solid transparent;border-radius:6px;counter-increment:s}
@@ -608,7 +609,7 @@ input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholde
   <nav class="rail" id="rail" aria-label="Lesson sections">
     <div class="rail-top">
       <div class="rail-brand"><span class="rail-dot"></span>STORM STUDIO<br><small>Week 13 · Thursday</small></div>
-      <div class="rail-ctl"><a class="rail-agenda" href="agenda.html" target="_blank" rel="noopener" title="Agenda board">📋</a><button id="themeBtn" aria-label="Light or dark mode">🌙</button><button id="langBtn" aria-pressed="true">ES</button></div>
+      <div class="rail-ctl"><a class="rail-agenda" href="agenda.html" target="_blank" rel="noopener" title="Agenda board">📋 Agenda</a><button id="themeBtn" aria-label="Light or dark mode">🌙</button><button id="langBtn" aria-pressed="true">ES</button></div>
     </div>
     <div class="prog" id="prog" aria-label="Lesson progress">
       <div class="prog-top" title="Tap to see each step"><span><b id="progPct">0%</b> <span id="progNext">Next: Bell ringer</span></span><span id="progCount">0 / 10</span></div>
@@ -635,6 +636,7 @@ input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholde
       <div class="eyebrow">Read &amp; listen · Informational text <span class="es">Lee y escucha · Texto informativo</span></div>
       <h1>How a Habit Is Built</h1>
       <p class="hero-sub">Cue → Routine → Reward → repeat. <span class="es">Señal → Rutina → Recompensa → repetir.</span></p>
+      <p class="hero-links"><a class="btn-link" href="agenda.html" target="_blank" rel="noopener">📋 Agenda board <span class="es">Tablero de agenda</span></a></p>
     </div>
     <svg class="hero-loop" viewBox="0 0 220 220" role="img" aria-label="The habit loop: cue, routine, reward, repeating in a circle">
       <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5 0 10z" fill="var(--muted)"/></marker></defs>
