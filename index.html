@@ -540,6 +540,37 @@ footer{font-family:var(--font-mono)!important}
 :root[data-theme="dark"] .rail-links a::before{color:#111}
 </style>
 
+<style>
+/* Magazine spacing */
+.main{padding-top:2rem}
+.main>*{margin-bottom:0}
+.hero{margin:0 0 2.5rem}
+.howto,.plan90{margin-bottom:2.5rem}
+.today,.bell,.lesson,.frame-grid{margin-bottom:3.5rem}
+.lesson{gap:2rem}
+.frame-grid{gap:1.5rem}
+h2.section-head{margin-top:5.5rem;margin-bottom:1.25rem;padding-top:2rem;border-top:2px solid var(--fg)!important;position:relative}
+h2.section-head::after{content:"";position:absolute;left:0;top:-2px;width:5rem;height:6px;background:var(--sec)}
+h2:not(.section-head){margin:3rem 0 .75rem}
+.item,.player,.passage{margin-bottom:2.5rem}
+.player{margin-bottom:1.5rem}
+.passage{gap:1.6rem}
+.para{padding-top:.8rem;padding-bottom:.8rem}
+.jot{margin:.4rem 0}
+.gl-note{margin-bottom:1.25rem}
+.item{padding:1.4rem 1.5rem;gap:1.1rem}
+.item::before,.bell::before,.hook::before{margin:-1.4rem -1.5rem 1rem}
+.bell{padding:1.4rem 1.5rem}
+.today{padding:1.4rem 1.5rem}
+.hook{padding:1.3rem 1.5rem}
+.bell-head{margin-bottom:.4rem}
+.draw{margin-top:1.5rem;padding-top:1.5rem;border-top:2px solid var(--line)}
+.score{margin-bottom:3rem}
+.exit{margin-bottom:4rem}
+.rubric{padding-top:1.5rem;margin-top:1rem}
+@media (min-width:960px){.main{padding:3rem 3.5rem 6rem}}
+</style>
+
 <div class="wrap">
   <nav class="rail" id="rail" aria-label="Lesson sections">
     <div class="rail-top">
