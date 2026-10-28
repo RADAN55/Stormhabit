@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="How a Habit Is Built — an interactive 90-minute EL lesson (grades 9–12, ELPA21 Levels 3–4) from Storm Studio · Laurel High School EL · EL Publishing.">
-<meta name="theme-color" content="#b8441f">
+<meta name="theme-color" content="#ff4d2e">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%81%3C/text%3E%3C/svg%3E">
 <style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 </head>
 <body>
 <title>How a Habit Is Built</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,700;0,9..144,900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Nunito:ital,wght@0,400;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
 /* Layout: one reading column (~65ch), a sticky audio bar, a side/bottom vocabulary card */
 :root{
@@ -325,7 +325,7 @@ h2.c-teal{--sec:#1b7f8a}h2.c-pink{--sec:#c2185b}h2.c-orange{--sec:#b8441f}h2.c-g
 .vid-play{font-size:3.2rem;line-height:1;width:5rem;height:5rem;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff}
 .vid-t{font-family:var(--font-read);font-size:1.2rem;font-weight:700;text-align:center;padding:0 1rem}
 .vid-s{font-size:.8rem;opacity:.85;text-align:center;padding:0 1rem}
-.vid-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:1px solid var(--line)}
+.vid-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:2px solid var(--line)}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vid-alt{color:var(--accent);font-weight:700}
 .vid-qs li{display:block}
@@ -412,13 +412,160 @@ button{font-weight:700}
 .passage{font-size:1.22rem}
 </style>
 
+<style>
+/* ===== Redesign: "Field notebook" neo-brutalist skin ===== */
+:root{
+  --bg:#f1f0ea; --surface:#ffffff; --fg:#111418; --muted:#525a66;
+  --accent:#ff4d2e; --accent-soft:#ffe3dc; --line:#111418;
+  --vocab:#0b6e62; --vocab-soft:#d9f2ec; --active:#fff3a3;
+  --font-read:"Source Serif 4",Georgia,serif;
+  --font-ui:"Public Sans","Segoe UI",Arial,sans-serif;
+  --font-display:"Bricolage Grotesque","Public Sans",sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --shadow:5px 5px 0 var(--fg);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1115; --surface:#181b22; --fg:#ffffff; --muted:#c7ccd6; --line:#e8e8e8;
+  --accent:#ff6a4d; --accent-soft:#4a2017; --vocab:#4fd1c0; --vocab-soft:#123b36; --active:#4a4210; --shadow:5px 5px 0 #e8e8e8 } }
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#181b22; --fg:#ffffff; --muted:#c7ccd6; --line:#e8e8e8;
+  --accent:#ff6a4d; --accent-soft:#4a2017; --vocab:#4fd1c0; --vocab-soft:#123b36; --active:#4a4210; --shadow:5px 5px 0 #e8e8e8 }
+body{background:var(--bg);background-image:linear-gradient(color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--fg) 6%,transparent) 1px,transparent 1px);background-size:28px 28px}
+.wrap{max-width:none;margin:0;padding:0 0 5rem;display:grid;grid-template-columns:1fr;gap:0}
+.main{max-width:74ch;margin:0 auto;padding:1rem 16px 3rem;min-width:0}
+@media (min-width:960px){
+  .wrap{grid-template-columns:16rem 1fr;padding-bottom:0}
+  .rail{position:sticky;top:0;height:100vh;overflow:auto;border-right:3px solid var(--fg);background:var(--surface);padding:1rem .9rem;display:grid;align-content:start;gap:1rem}
+  .rail-fab{display:none}
+  .main{padding:1.5rem 2rem 4rem}
+}
+@media (max-width:959px){
+  .rail{position:fixed;inset:auto 0 0 0;z-index:40;background:var(--surface);border-top:3px solid var(--fg);padding:.8rem 16px calc(.8rem + env(safe-area-inset-bottom,0px));display:grid;gap:.6rem;max-height:70vh;overflow:auto;transform:translateY(calc(100% - 3.9rem));transition:transform .25s}
+  .rail.open{transform:none}
+  .rail-fab{position:fixed;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:41;font-family:var(--font-mono);font-weight:700;background:var(--accent);color:#fff;border:2px solid var(--fg);box-shadow:var(--shadow);padding:.55rem .9rem;border-radius:999px}
+  .rail-links{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+}
+.rail-top{display:flex;justify-content:space-between;align-items:center;gap:.6rem}
+.rail-brand{font-family:var(--font-mono);font-size:.78rem;font-weight:700;letter-spacing:.08em;line-height:1.2}
+.rail-brand small{font-weight:500;color:var(--muted);letter-spacing:.02em}
+.rail-dot{display:inline-block;width:.6rem;height:.6rem;background:var(--accent);border:2px solid var(--fg);margin-right:.35rem;vertical-align:middle}
+.rail-ctl{display:flex;gap:.35rem}
+.rail-ctl button{font-family:var(--font-mono);font-weight:700;padding:.3rem .55rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);color:var(--fg);box-shadow:3px 3px 0 var(--fg)}
+.rail-ctl #langBtn{background:var(--vocab);color:#fff}
+.rail-links{list-style:none;margin:0;padding:0;display:grid;gap:.3rem;counter-reset:s}
+.rail-links a{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--fg);font-family:var(--font-ui);font-weight:600;font-size:.9rem;padding:.4rem .5rem;border:2px solid transparent;border-radius:6px;counter-increment:s}
+.rail-links a::before{content:counter(s,decimal-leading-zero);font-family:var(--font-mono);font-size:.72rem;color:#fff;background:var(--sec);padding:.1rem .35rem;border-radius:4px;border:2px solid var(--fg)}
+.rail-links a:hover,.rail-links a.here{border-color:var(--fg);background:color-mix(in srgb,var(--sec) 12%,var(--surface));box-shadow:3px 3px 0 var(--fg)}
+.prog{position:static;top:auto;border:2px solid var(--fg);box-shadow:var(--shadow);border-radius:8px;margin:0;padding:.5rem .65rem}
+.prog-top{font-family:var(--font-mono);font-size:.75rem}
+.prog-bar{height:.8rem;border-radius:4px;border:2px solid var(--fg);background:var(--surface)}
+.prog-fill{background:repeating-linear-gradient(45deg,var(--accent) 0 6px,#ffb300 6px 12px)}
+.prog-steps{display:flex!important}
+.prog-steps span{font-family:var(--font-mono);font-size:.62rem;border:1.5px solid var(--fg);border-radius:4px}
+.prog-steps span.on{background:var(--active);color:var(--fg)}
+
+/* type */
+h1,h2,.bell-title,.eq-q,.hook-q,.focus-title,.loop-name,.card .word,.score-big,.vid-t{font-family:var(--font-display);font-variation-settings:normal;letter-spacing:-.02em}
+h1{font-size:clamp(2.4rem,7vw,3.6rem);font-weight:800;line-height:.98;text-transform:uppercase}
+h1 .es,h2 .es{text-transform:none;font-size:.5em;font-weight:500;letter-spacing:0;font-family:var(--font-ui)}
+@media (max-width:959px){.rail-links a:last-child{margin-right:6.5rem}}
+h2.section-head{font-size:clamp(1.6rem,4.5vw,2.1rem);font-weight:800;text-transform:uppercase;border-top:0;padding:0;margin-top:3rem;gap:.6rem}
+h2.section-head .h-ic{border:2px solid var(--fg);border-radius:8px;box-shadow:3px 3px 0 var(--fg);background:var(--sec);color:#fff;font-size:1.2rem;width:2.3rem;height:2.3rem}
+h2:not(.section-head){font-weight:700;border-left:0;padding:0;font-size:1.3rem}
+h2:not(.section-head)::before{content:"//";font-family:var(--font-mono);color:var(--sec,var(--accent));margin-right:.4rem}
+.eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;font-weight:700}
+.eq-q{font-weight:800;font-style:normal;font-size:1.6rem}
+.hero-sub{font-family:var(--font-mono);font-style:normal;font-size:.9rem;color:var(--fg)}
+.passage{font-size:1.2rem;line-height:1.75}
+.timer span{font-family:var(--font-mono);background:var(--fg);color:#fff;border:0;border-radius:4px;padding:.15rem .5rem}
+.timer span.done{background:#2e7d4f;color:#fff}
+.pill,.plan90 li,.prog-steps span,.lab-count,.chart-note,.rub-s{font-family:var(--font-mono)}
+
+/* cards: hard edges, offset shadows */
+.item,.bell,.hook,.frame-box,.player,.phone,.loop-card,.card,.jot,.focus-box,.today{border:2px solid var(--fg)!important;border-radius:10px;box-shadow:var(--shadow);background:var(--surface)}
+.today{background:var(--surface);padding:1rem 1.1rem}
+.today::after{display:none}
+.hook{background:var(--active)!important}
+.jot{border-style:dashed!important}
+.jot.ok{border-style:solid!important;background:var(--vocab-soft)}
+.section-head+.gl-note,.gl-note{font-family:var(--font-ui)}
+.hero{border:2px solid var(--fg);border-radius:12px;box-shadow:var(--shadow);background:var(--surface);position:relative;overflow:hidden;padding:1.2rem 1.2rem}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,var(--active) 0 38%,transparent 38%);z-index:0}
+.hero>*{position:relative;z-index:1}
+.hero-loop{animation:none}
+.item,.bell,.hook,.frame-box,.player,.feedlab,.appdesign,.notebook,.vmatch,#grammar,.score,.exit,.video,.player{border-left-width:2px!important}
+.item::before,.bell::before,.hook::before{content:"";display:block;height:.45rem;margin:-1rem -1.1rem .8rem;background:var(--sec,var(--accent));border-bottom:2px solid var(--fg);border-radius:8px 8px 0 0}
+.item.video::before{background:#2e7d4f}
+.player::before{display:none}
+.player{border-radius:10px}
+.player.stuck{top:.6rem}
+button{border:2px solid var(--fg);border-radius:8px;box-shadow:3px 3px 0 var(--fg);font-family:var(--font-ui);font-weight:700}
+button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--fg)}
+button:disabled{box-shadow:none}
+.btn-primary,.lab-tap,.btn-link{background:var(--accent);border:2px solid var(--fg);color:#fff;box-shadow:3px 3px 0 var(--fg)}
+.poll button.picked,.ad button.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+.choices button.correct{background:#d9f2ec;border-color:var(--fg);color:var(--fg)}
+.choices button.wrong{background:var(--accent-soft)}
+.choices button.correct .letter{background:#2e7d4f;border-color:var(--fg)}
+.letter{border:2px solid var(--fg);font-family:var(--font-mono)}
+.pplay{box-shadow:none}
+.close,.sw,.es-toggle,.hear button,.pplay{box-shadow:none}
+.sw{border:2px solid var(--fg)}
+.oreac-row{border:2px solid var(--fg);background:var(--surface)}
+.oreac-letter{font-family:var(--font-display);border:2px solid var(--fg);box-shadow:none;background:var(--accent)}
+.oreac-row.filled .oreac-letter{background:#2e7d4f}
+.oreac-out{border-left:4px solid var(--fg);background:var(--active);color:var(--fg)}
+.rub-t th,.rub-t td{border:2px solid var(--fg)}
+.rub-t th{background:var(--fg);color:#fff}
+.rub-t tr.r2 td{background:var(--vocab-soft)}
+.legend{display:none}
+.plan90 li{border:2px solid var(--fg);border-radius:6px;background:var(--surface);box-shadow:2px 2px 0 var(--fg)}
+.plan90 li b{color:var(--accent)}
+.v{background:var(--active);color:var(--fg);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:var(--vocab);border-radius:2px}
+.s.now{background:var(--vocab-soft);box-shadow:0 0 0 3px var(--vocab-soft)}
+.para.reading{background:var(--active);border-radius:8px}
+.phone{border-radius:16px}
+.lab-screen{background:var(--bg)}
+.score-big{color:var(--accent);text-shadow:none;font-size:3.4rem}
+.rating{border:2px solid var(--fg);border-left:8px solid var(--vocab);background:var(--vocab-soft);border-radius:8px}
+.focus-overlay{background:rgba(17,20,24,.85)}
+.focus-box{border:3px solid var(--fg)!important;box-shadow:8px 8px 0 var(--accent)}
+footer{font-family:var(--font-mono)!important}
+.phone-tab.on{box-shadow:inset 0 -3px 0 var(--accent)}
+.badge{border:2px solid var(--fg)}
+:root[data-theme="dark"] .choices button.correct,:root[data-theme="dark"] .vm-col button.hit,:root[data-theme="dark"] .pill.ok{background:#1f4a30;color:#fff}
+:root[data-theme="dark"] .hook{color:var(--fg)}
+:root[data-theme="dark"] .hero::before{background:linear-gradient(120deg,#3a3510 0 38%,transparent 38%)}
+:root[data-theme="dark"] .timer span{background:#fff;color:#111}
+:root[data-theme="dark"] .rail-links a::before{color:#111}
+</style>
+
 <div class="wrap">
-  <div class="lang"><button id="themeBtn" aria-label="Light or dark mode">🌙 Dark</button><button id="langBtn" aria-pressed="true">Español: ON</button></div>
-  <div class="prog" id="prog" aria-label="Lesson progress">
-    <div class="prog-top" title="Tap to see each step"><span><b id="progPct">0%</b> done · <span id="progNext">Next: Bell ringer</span></span><span id="progCount">0 / 10</span></div>
-    <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
-    <div class="prog-steps" id="progSteps"></div>
-  </div>
+  <nav class="rail" id="rail" aria-label="Lesson sections">
+    <div class="rail-top">
+      <div class="rail-brand"><span class="rail-dot"></span>STORM STUDIO<br><small>Week 13 · Tuesday</small></div>
+      <div class="rail-ctl"><button id="themeBtn" aria-label="Light or dark mode">🌙</button><button id="langBtn" aria-pressed="true">ES</button></div>
+    </div>
+    <div class="prog" id="prog" aria-label="Lesson progress">
+      <div class="prog-top" title="Tap to see each step"><span><b id="progPct">0%</b> <span id="progNext">Next: Bell ringer</span></span><span id="progCount">0 / 10</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-steps" id="progSteps"></div>
+    </div>
+    <ol class="rail-links">
+      <li><a href="#s-today" style="--sec:#1e5a8a">Today</a></li>
+      <li><a href="#s-bell" style="--sec:#c9a227">Bell ringer</a></li>
+      <li><a href="#s-hook" style="--sec:#b8441f">Hook + lab</a></li>
+      <li><a href="#s-video" style="--sec:#2e7d4f">Video</a></li>
+      <li><a href="#s-read" style="--sec:#2e7d4f">Read &amp; listen</a></li>
+      <li><a href="#s-vocab" style="--sec:#1b7f8a">Vocabulary</a></li>
+      <li><a href="#grammar" style="--sec:#c2185b">Grammar</a></li>
+      <li><a href="#s-plan" style="--sec:#6a3d9a">Rebuild a habit</a></li>
+      <li><a href="#s-test" style="--sec:#b8441f">Test prep</a></li>
+      <li><a href="#s-exit" style="--sec:#6a3d9a">Exit ticket</a></li>
+    </ol>
+  </nav>
+  <button class="rail-fab" id="railFab" aria-label="Open lesson menu" aria-expanded="false"><span id="fabPct">0%</span> Menu</button>
+  <main class="main">
   <div class="hero">
     <div class="hero-text">
       <div class="eyebrow">Read &amp; listen · Informational text <span class="es">Lee y escucha · Texto informativo</span></div>
@@ -445,7 +592,7 @@ button{font-weight:700}
   <p class="legend"><span style="--sec:#1e5a8a">Today's goals</span><span style="--sec:#c9a227">Bell ringer</span><span style="--sec:#b8441f">Hook &amp; lab</span><span style="--sec:#2e7d4f">Read &amp; listen</span><span style="--sec:#6a3d9a">Rebuild a habit</span><span style="--sec:#1b7f8a">Vocabulary</span><span style="--sec:#c2185b">Grammar</span><span style="--sec:#b8441f">Test prep</span><span style="--sec:#6a3d9a">Exit ticket</span></p>
   <div class="plan90"><span class="eyebrow">90-minute plan <span class="es">Plan de 90 minutos</span></span>
     <ol><li><b>5</b> Bell ringer</li><li><b>5</b> Draw it</li><li><b>5</b> Hook + lab</li><li><b>10</b> Video</li><li><b>15</b> Read &amp; listen</li><li><b>8</b> Vocabulary</li><li><b>7</b> Grammar</li><li><b>10</b> Rebuild a habit</li><li><b>15</b> Test prep</li><li><b>10</b> Exit ticket</li></ol></div>
-  <section class="today" aria-label="Today's lesson">
+  <section class="today" id="s-today" aria-label="Today's lesson">
     <div class="today-eq">
       <div class="eyebrow">Essential question</div>
       <p class="eq-q">Who runs your habits: you, or the loop?</p>
@@ -460,7 +607,7 @@ button{font-weight:700}
     </div>
   </section>
 
-  <section class="bell" aria-label="Bell ringer">
+  <section class="bell" id="s-bell" aria-label="Bell ringer">
     <div class="bell-head">
       <div><div class="eyebrow">Bell ringer · 10 minutes · Part 1 · 5 minutes</div><p class="bell-title">Agree or disagree?</p></div>
       <div class="timer"><span id="timerText">5:00</span><button id="timerBtn">Start</button></div>
@@ -496,7 +643,7 @@ button{font-weight:700}
     </div>
   </section>
 
-  <section class="lesson" aria-label="Lesson frame">
+  <section class="lesson" id="s-hook" aria-label="Lesson frame">
     <div class="hook">
       <div class="bell-head">
         <div class="eyebrow">Hook + habit lab · 5 minutes</div>
@@ -579,7 +726,7 @@ button{font-weight:700}
   </section>
 
   <h2 class="section-head c-green"><span class="h-ic">🎬</span>Watch · The habit loop <span class="es">Mira · El ciclo del hábito</span></h2>
-  <section class="item video" aria-label="Video" style="--sec:#2e7d4f;border-left:8px solid var(--sec)">
+  <section class="item video" id="s-video" aria-label="Video" style="--sec:#2e7d4f;border-left:8px solid var(--sec)">
     <div class="bell-head">
       <div><div class="eyebrow">Watch · 10 minutes</div><p class="bell-title" style="margin:0">The Power of Habit, animated</p></div>
       <div class="timer"><span id="timer7Text">10:00</span><button id="timer7Btn">Start</button></div>
@@ -627,7 +774,7 @@ button{font-weight:700}
   <div class="bell-head" style="margin-bottom:.4rem"><div class="eyebrow" style="color:#2e7d4f;font-weight:700">Read &amp; listen · 15 minutes <span class="es">Lee y escucha · 15 minutos</span></div><div class="timer"><span id="timer8Text">15:00</span><button id="timer8Btn">Start</button></div></div>
   <p class="gl-note">Press <b>Listen to all</b> and follow along. The reading stops three times for you to write a sentence. Tap any blue word for its meaning.<span class="es">Pulsa <b>Escuchar todo</b> y sigue la lectura. La lectura se detiene tres veces para que escribas una oración. Toca cualquier palabra azul para ver su significado.</span></p>
 
-  <div class="player" role="region" aria-label="Audio player">
+  <div class="player" id="s-read" role="region" aria-label="Audio player">
     <button class="btn-primary" id="playAll">▶ Listen to all</button>
     <button id="pauseBtn" disabled>⏸ Pause</button>
     <button id="stopBtn" disabled>■ Stop</button>
@@ -672,7 +819,7 @@ button{font-weight:700}
   </div>
 
   <h2 class="section-head c-purple"><span class="h-ic">🔧</span>Rebuild a habit <span class="es">Reconstruye un hábito</span></h2>
-  <section class="item appdesign" aria-label="Rebuild a habit">
+  <section class="item appdesign" id="s-plan" aria-label="Rebuild a habit">
     <div class="bell-head">
       <div><div class="eyebrow">Rebuild a habit · 10 minutes</div><p class="bell-title" style="margin:0">Keep the cue. Keep the reward. Change the routine.</p></div>
       <div class="timer"><span id="timer5Text">10:00</span><button id="timer5Btn">Start</button></div>
@@ -707,7 +854,7 @@ button{font-weight:700}
     <p class="item-ext"><b>Explain it (30 seconds):</b> <i>“My habit is ___. When ___, I ___. The reward is ___. I will replace ___ with ___ because the brain still gets its cue and its reward.”</i></p>
   </section>
 
-  <section class="item notebook" aria-label="Vocabulary notebook">
+  <section class="item notebook" id="s-vocab" aria-label="Vocabulary notebook">
     <div class="eyebrow">Vocabulary notebook</div>
     <p class="item-q">As you read, tap each <span class="v" style="cursor:default">blue word</span> and copy it into your notebook with its meaning <b>in your own words</b>. Set up your page like this:</p>
     <div class="nb-ex"><span>Word</span><span>My definition</span></div>
@@ -755,7 +902,7 @@ button{font-weight:700}
     <p class="item-ext"><b>Your turn:</b> In your notebook, rewrite one of the three sentences with the joining word in the <u>middle</u> (<i>Students reach for their phones when the bell rings.</i>) and explain what happened to the comma.</p>
   </section>
 
-  <h2 class="section-head c-orange"><span class="h-ic">📝</span>Test prep <span class="es">Preparación para el examen</span></h2>
+  <h2 class="section-head c-orange" id="s-test"><span class="h-ic">📝</span>Test prep <span class="es">Preparación para el examen</span></h2>
   <div class="bell-head" style="margin-bottom:.5rem">
     <p class="gl-note" style="margin:0;flex:1 1 16rem">Five ELPA21-style questions in 15 minutes. Your answers are graded automatically on this page; show your score to your teacher.<span class="es">Cinco preguntas al estilo ELPA21 en 15 minutos. Tus respuestas se califican automáticamente en esta página; muestra tu puntuación a tu maestro.</span></p>
     <div class="timer"><span id="timer6Text">15:00</span><button id="timer6Btn">Start</button></div>
@@ -890,7 +1037,7 @@ button{font-weight:700}
 
   <h2 class="section-head c-purple"><span class="h-ic">🎟️</span>Exit ticket <span class="es">Boleto de salida</span></h2>
   <div class="bell-head" style="margin-bottom:.4rem"><div class="eyebrow" style="color:#6a3d9a;font-weight:700">Exit ticket + rubric · 10 minutes <span class="es">Boleto de salida + rúbrica · 10 minutos</span></div><div class="timer"><span id="timer11Text">10:00</span><button id="timer11Btn">Start</button></div></div>
-  <section class="item exit" aria-label="Exit ticket">
+  <section class="item exit" id="s-exit" aria-label="Exit ticket">
     <div class="eyebrow">Essential question</div>
     <p class="eq-q">Who runs your habits: you, or the loop?</p>
     <p class="item-dir">Write <b>one sentence for each letter</b> of <b>O·R·E·A·C</b>. Use at least <b>three vocabulary words</b> from the passage, and make at least one sentence a complex sentence with <i>when, after, once,</i> or <i>until</i>. Your five sentences become one paragraph at the bottom.</p>
@@ -935,6 +1082,7 @@ button{font-weight:700}
     <div class="acts"><a id="submitLink" class="btn-link" href="https://form.jotform.com/262995533300054" target="_blank" rel="noopener" aria-disabled="true">Submit my exit ticket</a></div>
     <p class="chart-note" id="submitNote" style="text-align:left">Finish your exit ticket to turn on Submit. It opens a short form with your answer already filled in.</p>
   </section>
+  </main>
 </div>
 
 <div class="focus-overlay" id="focusOverlay" hidden>
@@ -1308,13 +1456,27 @@ document.querySelectorAll('a.vid, a.vid-alt').forEach(a => a.addEventListener('c
   new IntersectionObserver(es => es.forEach(e => pl.classList.toggle('stuck', e.isIntersecting || current >= 0)), {rootMargin:'-120px 0px 0px 0px'}).observe(ps);
 })();
 
+
+/* Rail navigation */
+(function(){
+  const rail = document.getElementById('rail'), fab = document.getElementById('railFab');
+  fab.onclick = () => { const o = rail.classList.toggle('open'); fab.setAttribute('aria-expanded', o); };
+  rail.querySelectorAll('.rail-links a').forEach(a => a.addEventListener('click', () => { rail.classList.remove('open'); fab.setAttribute('aria-expanded', false); }));
+  const links = [...rail.querySelectorAll('.rail-links a')];
+  const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ links.forEach(a => a.classList.toggle('here', a.getAttribute('href') === '#' + e.target.id)); } }); }, {rootMargin:'-30% 0px -60% 0px'}).observe && targets.forEach(t => new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ links.forEach(a => a.classList.toggle('here', a.getAttribute('href') === '#' + e.target.id)); } }); }, {rootMargin:'-30% 0px -60% 0px'}).observe(t));
+  }
+  setInterval(() => { document.getElementById('fabPct').textContent = document.getElementById('progPct').textContent; }, 1000);
+})();
+
 /* Light / dark mode toggle */
 (function(){
   const root = document.documentElement, btn = document.getElementById('themeBtn');
   let saved = null; try { saved = localStorage.getItem('habit-theme'); } catch(e){}
   const sys = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   let dark = saved ? saved === 'dark' : sys;
-  function apply(){ root.setAttribute('data-theme', dark ? 'dark' : 'light'); btn.textContent = dark ? '☀️ Light' : '🌙 Dark'; try { localStorage.setItem('habit-theme', dark ? 'dark' : 'light'); } catch(e){} }
+  function apply(){ root.setAttribute('data-theme', dark ? 'dark' : 'light'); btn.textContent = dark ? '☀️' : '🌙'; try { localStorage.setItem('habit-theme', dark ? 'dark' : 'light'); } catch(e){} }
   btn.onclick = () => { dark = !dark; apply(); };
   apply();
 })();
@@ -1408,7 +1570,7 @@ document.querySelectorAll('a.vid, a.vid-alt').forEach(a => a.addEventListener('c
   });
   document.querySelectorAll('.es-toggle').forEach(b => b.onclick = () => { const box = b.nextElementSibling; const open = !box.classList.contains('open'); box.classList.toggle('open', open); b.setAttribute('aria-expanded', open); b.textContent = open ? 'Ocultar español ▴' : 'Ver en español ▾'; });
   const btn = document.getElementById('langBtn');
-  btn.onclick = () => { const off = document.body.classList.toggle('no-es'); btn.textContent = off ? 'Español: OFF' : 'Español: ON'; btn.setAttribute('aria-pressed', !off); };
+  btn.onclick = () => { const off = document.body.classList.toggle('no-es'); btn.textContent = off ? 'EN' : 'ES'; btn.title = off ? 'Spanish off' : 'Spanish on'; btn.setAttribute('aria-pressed', !off); };
 })();
 
 /* Hook poll */
@@ -1830,7 +1992,7 @@ document.getElementById('copyReport').onclick = async () => {
   setTimeout(() => { b.innerHTML = '📋 Copy my report <span class="es">Copiar mi reporte</span>'; }, 1500);
 };
 setInterval(tickProgress, 1000); tickProgress();
-document.querySelector('.prog-top').onclick = () => document.getElementById('prog').classList.toggle('open');
+
 
 
 
@@ -1838,6 +2000,6 @@ document.querySelector('.prog-top').onclick = () => document.getElementById('pro
 
 </script>
 
-<footer style="text-align:center;font-size:.8rem;color:#6b6257;padding:2rem 1rem;font-family:'Nunito',sans-serif">Storm Studio · Week 13 · Tuesday · Laurel High School EL · EL Publishing · Richard A. Daniel, M.Ed.</footer>
+<footer style="text-align:center;font-size:.8rem;color:#525a66;padding:2rem 1rem 6rem">Storm Studio · Week 13 · Tuesday · Laurel High School EL · EL Publishing · Richard A. Daniel, M.Ed.</footer>
 </body>
 </html>
