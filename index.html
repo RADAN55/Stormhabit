@@ -571,6 +571,17 @@ h2:not(.section-head){margin:3rem 0 .75rem}
 @media (min-width:960px){.main{padding:3rem 3.5rem 6rem}}
 </style>
 
+<style>
+.prog-steps span.late{background:var(--accent);color:#fff;border-color:var(--fg);animation:latePulse 1.2s ease-in-out infinite}
+.prog-steps span.late::after{content:" ⏰"}
+.prog-steps span.on::after{content:" ✓"}
+.rail-links a.done::after{content:"✓";margin-left:auto;font-family:var(--font-mono);color:#2e7d4f;font-weight:700}
+.rail-links a.late{background:var(--accent-soft);border-color:var(--accent)}
+.rail-links a.late::after{content:"⏰";margin-left:auto}
+@keyframes latePulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 60%,transparent)}50%{box-shadow:0 0 0 5px transparent}}
+@media (prefers-reduced-motion:reduce){.prog-steps span.late{animation:none}}
+</style>
+
 <div class="wrap">
   <nav class="rail" id="rail" aria-label="Lesson sections">
     <div class="rail-top">
@@ -1304,11 +1315,11 @@ function makeTimer(textId, btnId, total){
   const txt = document.getElementById(textId), btn = document.getElementById(btnId);
   btn.onclick = () => {
     if(id){ clearInterval(id); id = null; btn.textContent = 'Resume'; return; }
-    if(left <= 0){ left = total; txt.classList.remove('done'); txt.textContent = fmt(left); }
+    if(left <= 0){ left = total; txt.classList.remove('done'); txt.textContent = fmt(left); if(window.__timeUp) delete window.__timeUp[textId]; }
     btn.textContent = 'Pause';
     id = setInterval(() => {
       left--; txt.textContent = fmt(left);
-      if(left <= 0){ clearInterval(id); id = null; txt.textContent = 'Time!'; txt.classList.add('done'); btn.textContent = 'Restart'; }
+      if(left <= 0){ clearInterval(id); id = null; txt.textContent = 'Time!'; txt.classList.add('done'); btn.textContent = 'Restart'; (window.__timeUp = window.__timeUp || {})[textId] = true; }
     }, 1000);
   };
 }
@@ -1991,7 +2002,17 @@ const stepsEl = document.getElementById('progSteps');
 STEPS.forEach(([n]) => { const s = document.createElement('span'); s.textContent = n; stepsEl.appendChild(s); });
 function tickProgress(){
   let done = 0, next = null;
-  STEPS.forEach(([n, f], i) => { let ok = false; try { ok = !!f(); } catch(e){} stepsEl.children[i].classList.toggle('on', ok); if(ok) done++; else if(!next) next = n; });
+  const TIMERS = {0:['timerText','timer2Text'], 1:['timer3Text'], 2:['timer3Text'], 3:['timer7Text'], 4:['timer8Text'], 5:['timer9Text'], 6:['timer5Text'], 7:['timer10Text'], 8:['timer6Text'], 9:['timer11Text']};
+  const LINKS = {0:'#s-bell', 1:'#s-hook', 2:'#s-hook', 3:'#s-video', 4:'#s-read', 5:'#s-vocab', 6:'#s-plan', 7:'#grammar', 8:'#s-test', 9:'#s-exit'};
+  STEPS.forEach(([n, f], i) => {
+    let ok = false; try { ok = !!f(); } catch(e){}
+    const up = (TIMERS[i] || []).some(t => window.__timeUp && window.__timeUp[t]);
+    const chip = stepsEl.children[i];
+    chip.classList.toggle('on', ok); chip.classList.toggle('late', up && !ok); chip.title = ok ? 'Done' : up ? 'Time is up and this section is not finished' : '';
+    const link = document.querySelector(`.rail-links a[href="${LINKS[i]}"]`);
+    if(link){ link.classList.toggle('done', ok); link.classList.toggle('late', !ok && up); }
+    if(ok) done++; else if(!next) next = n;
+  });
   document.getElementById('progPct').textContent = Math.round(done / STEPS.length * 100) + '%';
   document.getElementById('progCount').textContent = `${done} / ${STEPS.length}`;
   document.getElementById('progFill').style.width = (done / STEPS.length * 100) + '%';
