@@ -452,6 +452,7 @@ body{background:var(--bg);background-image:linear-gradient(color-mix(in srgb,var
 .rail-ctl{display:flex;gap:.35rem}
 .rail-ctl button{font-family:var(--font-mono);font-weight:700;padding:.3rem .55rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);color:var(--fg);box-shadow:3px 3px 0 var(--fg)}
 .rail-ctl #langBtn{background:var(--vocab);color:#fff}
+.rail-agenda{display:inline-grid;place-items:center;text-decoration:none;font-size:1rem;padding:.3rem .5rem;border:2px solid var(--fg);border-radius:6px;background:var(--surface);box-shadow:3px 3px 0 var(--fg);color:var(--fg)}
 .rail-links{list-style:none;margin:0;padding:0;display:grid;gap:.3rem;counter-reset:s}
 .rail-links a{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--fg);font-family:var(--font-ui);font-weight:600;font-size:.9rem;padding:.4rem .5rem;border:2px solid transparent;border-radius:6px;counter-increment:s}
 .rail-links a::before{content:counter(s,decimal-leading-zero);font-family:var(--font-mono);font-size:.72rem;color:#fff;background:var(--sec);padding:.1rem .35rem;border-radius:4px;border:2px solid var(--fg)}
@@ -607,7 +608,7 @@ input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholde
   <nav class="rail" id="rail" aria-label="Lesson sections">
     <div class="rail-top">
       <div class="rail-brand"><span class="rail-dot"></span>STORM STUDIO<br><small>Week 13 · Thursday</small></div>
-      <div class="rail-ctl"><button id="themeBtn" aria-label="Light or dark mode">🌙</button><button id="langBtn" aria-pressed="true">ES</button></div>
+      <div class="rail-ctl"><a class="rail-agenda" href="agenda.html" target="_blank" rel="noopener" title="Agenda board">📋</a><button id="themeBtn" aria-label="Light or dark mode">🌙</button><button id="langBtn" aria-pressed="true">ES</button></div>
     </div>
     <div class="prog" id="prog" aria-label="Lesson progress">
       <div class="prog-top" title="Tap to see each step"><span><b id="progPct">0%</b> <span id="progNext">Next: Bell ringer</span></span><span id="progCount">0 / 10</span></div>
