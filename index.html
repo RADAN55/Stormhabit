@@ -798,7 +798,7 @@ input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholde
     <p class="bell-dir"><span class="todo-tag">WATCH + NOTEBOOK</span><b>Step 1:</b> Watch once with captions on (tap <b>CC</b>). Turn on English captions, or Spanish if you need them.<br><b>Step 2:</b> As you watch, listen for the <u>three parts</u> of the habit loop and write them in your notebook.<br><b>Step 3:</b> Answer the three video checks below. They grade themselves; you get one try each.</p>
     <div class="vid-frame"><iframe src="https://www.youtube-nocookie.com/embed/UMOZZ5uZgxA?rel=0&cc_load_policy=1" title="The Power of Habit Animated Summary" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <p class="chart-note" style="text-align:left"><a class="vid-alt" href="https://www.youtube.com/watch?v=UMOZZ5uZgxA" target="_blank" rel="noopener">▶ Open the video on YouTube instead</a> · <span class="es">Abrir el video en YouTube</span></p>
-    <p class="chart-note" style="text-align:left">Video: “The Power of Habit Animated Summary” on YouTube, based on the book by Charles Duhigg. Watch it right here. If you open it on YouTube instead, the attention lock stays off for 12 minutes.</p>
+    <p class="chart-note" style="text-align:left">Video: “The Power of Habit Animated Summary” on YouTube, based on the book by Charles Duhigg. Watch it right here, or open it on YouTube.</p>
     <div class="item" style="padding:.8rem .9rem">
       <p class="item-q"><b>Video check 1:</b> What are the three parts of the habit loop?<span class="es"><b>Comprobación 1:</b> ¿Cuáles son las tres partes del ciclo del hábito?</span></p>
       <div class="choices" data-vq="1" role="group">
@@ -1149,20 +1149,6 @@ input.oreac-in:placeholder-shown,.ad-l input:placeholder-shown,#sname:placeholde
   </main>
 </div>
 
-<div class="focus-overlay" id="focusOverlay" hidden>
-  <div class="focus-box" role="alertdialog" aria-live="assertive" aria-label="Attention check">
-    <div class="focus-icon">🔁</div>
-    <p class="focus-title" id="focusTitle">You left the lesson.</p><p class="focus-title es" id="focusTitleEs" style="font-size:1.15rem;margin-top:-.3rem">Saliste de la lección.</p>
-    <p class="focus-msg" id="focusMsg"></p><p class="focus-msg es" id="focusMsgEs"></p>
-    <p class="focus-stat" id="focusStat"></p>
-    <p class="focus-msg"><b>Raise your hand.</b> Your teacher must enter the code to unlock the lesson.<span class="es"><b>Levanta la mano.</b> Tu maestro debe escribir el código para desbloquear la lección.</span></p>
-    <form class="focus-form" id="focusForm" autocomplete="off">
-      <input id="focusCode" type="password" inputmode="numeric" placeholder="Teacher code / Código" aria-label="Teacher code">
-      <button class="btn-primary" id="focusBack" type="submit">Unlock · Desbloquear ▶</button>
-    </form>
-    <p class="feedback focus-err" id="focusErr"></p>
-  </div>
-</div>
 
 <div class="card" id="card" role="dialog" aria-live="polite" aria-label="Word definition">
   <div class="top"><div><p class="word" id="cWord"></p><span class="pos" id="cPos"></span></div><button class="close" id="cClose" aria-label="Close / Cerrar">✕</button></div>
@@ -1354,7 +1340,7 @@ makeTimer('timer8Text', 'timer8Btn', 900);
 makeTimer('timer9Text', 'timer9Btn', 480);
 makeTimer('timer10Text', 'timer10Btn', 420);
 makeTimer('timer11Text', 'timer11Btn', 600);
-document.querySelectorAll('a.vid, a.vid-alt').forEach(a => a.addEventListener('click', () => { window.__videoPass = Date.now(); }));
+
 
 /* Sketchpad */
 (function(){
@@ -1434,60 +1420,7 @@ document.querySelectorAll('a.vid, a.vid-alt').forEach(a => a.addEventListener('c
   });
 })();
 
-/* Attention check: off-tab and idle warnings */
-(function(){
-  const IDLE_MS = 3 * 60 * 1000;          // 3 minutes with no activity
-  const overlay = document.getElementById('focusOverlay'), title = document.getElementById('focusTitle'), msg = document.getElementById('focusMsg'), stat = document.getElementById('focusStat');
-  const baseTitle = document.title;
-  let awayCount = 0, idleCount = 0, idleTimer = null, hiddenAt = null, titleFlash = null, shown = false;
-  const TEACHER_CODE = '1103';            // teacher unlock code
-  const codeIn = document.getElementById('focusCode'), err = document.getElementById('focusErr');
-  let tries = 0;
-  const nudges = [
-    'Remember paragraph 2: the bell is the cue, but you choose the routine. Choose the lesson.',
-    'Paragraph 3: at first a routine takes effort. Come back and put in the effort.',
-    'The reward is the reason the loop repeats. Make finishing this lesson the reward.',
-    'Keep the cue, keep the reward, change the routine. New routine: come back to the page.'
-  ];
-  const nudgesEs = [
-    'Recuerda el párrafo 2: el timbre es la señal, pero tú eliges la rutina. Elige la lección.',
-    'Párrafo 3: al principio una rutina requiere esfuerzo. Vuelve y pon el esfuerzo.',
-    'La recompensa es la razón por la que el ciclo se repite. Haz que terminar esta lección sea la recompensa.',
-    'Conserva la señal, conserva la recompensa, cambia la rutina. Rutina nueva: vuelve a la página.'
-  ];
-  const extraEs = e => e.replace('You clicked into another window.','Hiciste clic en otra ventana.').replace(/You were gone about (\d+) seconds\./,'Estuviste fuera unos $1 segundos.').replace(/You were gone about (\d+) minutes?\./,'Estuviste fuera unos $1 minutos.');
-  function show(kind, extra){
-    if(shown) return; shown = true;
-    const k = (awayCount + idleCount) % nudges.length;
-    title.textContent = kind === 'away' ? 'You left the lesson.' : 'Still there?';
-    document.getElementById('focusTitleEs').textContent = kind === 'away' ? 'Saliste de la lección.' : '¿Sigues ahí?';
-    msg.textContent = (kind === 'idle' ? 'Nothing has happened on this page for 3 minutes. ' : '') + nudges[k] + (extra ? ' ' + extra : '');
-    document.getElementById('focusMsgEs').textContent = (kind === 'idle' ? 'No ha pasado nada en esta página durante 3 minutos. ' : '') + nudgesEs[k] + (extra ? ' ' + extraEs(extra) : '');
-    stat.textContent = `Times off this tab: ${awayCount} · Veces fuera de esta pestaña: ${awayCount}`;
-    overlay.hidden = false; codeIn.focus();
-    if(synth && current >= 0 && !paused){ synth.pause(); paused = true; pauseBtn.textContent = '▶ Resume'; status.textContent = 'Paused for attention check.'; }
-  }
-  function hide(){ overlay.hidden = true; shown = false; codeIn.value = ''; err.textContent = ''; tries = 0; resetIdle(); }
-  document.getElementById('focusForm').onsubmit = e => {
-    e.preventDefault();
-    if(codeIn.value.trim().toUpperCase() === TEACHER_CODE){ hide(); return; }
-    tries++; codeIn.value = ''; codeIn.classList.remove('shake'); void codeIn.offsetWidth; codeIn.classList.add('shake');
-    err.innerHTML = tries >= 3 ? bi('That is not the code. Only your teacher can unlock this screen. Keep your hand up.','Ese no es el código. Solo tu maestro puede desbloquear esta pantalla. Mantén la mano levantada.') : bi('That is not the code. Raise your hand for your teacher.','Ese no es el código. Levanta la mano para llamar a tu maestro.');
-    codeIn.focus();
-  };
-  function resetIdle(){}   // idle warnings off: the screen locks only when the student leaves this tab
-  document.addEventListener('visibilitychange', () => {
-    if(document.visibilityState === 'hidden'){
-      hiddenAt = Date.now(); awayCount++;
-      let on = false; titleFlash = setInterval(() => { document.title = (on = !on) ? '👀 Come back to the lesson' : baseTitle; }, 900);
-    } else {
-      clearInterval(titleFlash); document.title = baseTitle;
-      const secs = hiddenAt ? Math.round((Date.now() - hiddenAt) / 1000) : 0; hiddenAt = null;
-      if(window.__videoPass && Date.now() - window.__videoPass < 12 * 60 * 1000){ awayCount--; return; }   // watching the lesson video
-      show('away', secs >= 5 ? `You were gone about ${secs < 60 ? secs + ' seconds' : Math.round(secs/60) + ' minute' + (Math.round(secs/60) === 1 ? '' : 's')}.` : '');
-    }
-  });
-})();
+/* Attention lock removed */
 
 
 
