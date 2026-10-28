@@ -1,6 +1,6 @@
 # Storm Habit — How a Habit Is Built
 
-Interactive 90-minute EL lesson (grades 9–12, ELPA21 Levels 3–4) for Week 13, Tuesday, at Laurel High School. Part of the Storm Studio / EL Publishing resource ecosystem.
+Interactive 90-minute EL lesson (grades 9–12, ELPA21 Levels 3–4) for Week 13, Thursday, at Laurel High School. Part of the Storm Studio / EL Publishing resource ecosystem.
 
 **Live page:** https://radan55.github.io/stormhabit/
 
